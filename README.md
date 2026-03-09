@@ -114,9 +114,9 @@ Yes — each person creates their own account with a separate email and password
 
 ## 📜 License & Ownership
 
-© 2025 **DineshR-45**. All rights reserved.
+© 2025 **Dinesh R**. All rights reserved.
 
-This project was designed and built by **DineshR-45**.
+This project was designed and built by **Dinesh R**.
 Viewing the source code is permitted for learning purposes.
 Reselling or republishing this project without permission is not allowed.
 See the [LICENSE](LICENSE) file for full details.
