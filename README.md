@@ -8,11 +8,11 @@
 
 ## 📸 Screenshots
 
-![Dashboard](screenshot1.png)
+![Dashboard](Screenshot1.png)
 
-![Habits Page](screenshot2.png)
+![Habits Page](Screenshot2.png)
 
-![Analytics](screenshot3.png)
+![Analytics](Screenshot3.png)
 
 ---
 
