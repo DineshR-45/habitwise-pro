@@ -8,22 +8,21 @@
 <!-- ═══════════════════════════════════════════════════
      OWNERSHIP & COPYRIGHT DECLARATION
      Product:   HabitWise Pro
-     Created:   2025
-     Owner:     [YOUR FULL NAME HERE]
-     Website:   [YOUR WEBSITE URL HERE]
-     Contact:   [YOUR EMAIL HERE]
+     Version:   1.0
+     Created:   2026
+     Owner:     Dinesh R
+     Contact:   dineshrc1024@gmail.com
+
 
      This software is the intellectual property of the
-     owner listed above. Unauthorized copying, resale,
-     or redistribution without written permission is
-     prohibited. All rights reserved.
+     owner listed above. All rights reserved © 2026.
 ═══════════════════════════════════════════════════ -->
 
 <meta name="application-name" content="HabitWise Pro">
-<meta name="author" content="[YOUR NAME HERE]">
+<meta name="author" content="Dinesh R">
 <meta name="description" content="HabitWise Pro — A professional daily habit tracker. Build streaks, analyze progress, and achieve your goals.">
-<meta name="copyright" content="© 2025 [YOUR NAME HERE]. All rights reserved.">
-<meta name="owner" content="[YOUR NAME HERE]">
+<meta name="copyright" content="© 2026 Dinesh R. All rights reserved.">
+<meta name="owner" content="Dinesh R">
 <meta property="og:title" content="HabitWise Pro">
 <meta property="og:description" content="Professional habit tracking — streaks, analytics, dark mode and more.">
 <meta property="og:type" content="website">
@@ -117,6 +116,11 @@ body{font-family:'Figtree',sans-serif;background:var(--bg);color:var(--text);min
 .auth-divider::before{left:0}.auth-divider::after{right:0}
 .auth-error{font-size:13px;color:var(--red);background:var(--red-light);border-radius:8px;padding:10px 12px;display:none}
 .auth-error.show{display:block}
+.pw-wrap{position:relative;display:flex;align-items:center}
+.pw-wrap .auth-input{padding-right:44px;width:100%}
+.pw-eye{position:absolute;right:12px;background:none;border:none;cursor:pointer;font-size:16px;color:var(--text3);padding:4px;border-radius:6px;line-height:1;transition:color var(--transition)}
+.pw-eye:hover{color:var(--text)}
+.pw-eye.active{color:var(--accent)}
 
 /* ══════════════════════════════════════════
    SIDEBAR
@@ -440,17 +444,42 @@ body{font-family:'Figtree',sans-serif;background:var(--bg);color:var(--text);min
       <button class="auth-tab" onclick="switchAuthTab('signup',this)">Create Account</button>
     </div>
     <div class="auth-error" id="auth-error"></div>
+
+    <!-- LOGIN FORM -->
     <div class="auth-form" id="auth-form-login">
-      <div class="auth-field"><label>Email</label><input class="auth-input" id="login-email" type="email" placeholder="you@example.com" value="demo@habitwise.app"></div>
-      <div class="auth-field"><label>Password</label><input class="auth-input" id="login-pass" type="password" placeholder="••••••••" value="demo1234"></div>
+      <div class="auth-field">
+        <label>Email Address</label>
+        <input class="auth-input" id="login-email" type="email" placeholder="you@gmail.com" autocomplete="email">
+      </div>
+      <div class="auth-field">
+        <label>Password</label>
+        <div class="pw-wrap">
+          <input class="auth-input" id="login-pass" type="password" placeholder="Enter your password" autocomplete="current-password">
+          <button type="button" class="pw-eye" onclick="togglePw('login-pass',this)" title="Show/hide password">👁</button>
+        </div>
+      </div>
       <button class="auth-btn" onclick="doLogin()">Sign In →</button>
-      <div class="auth-divider">or continue as</div>
-      <button class="auth-btn" style="background:var(--surface2);color:var(--text);font-family:'Figtree',sans-serif;font-weight:600" onclick="doGuest()">👤 Guest (no account needed)</button>
+      <div class="auth-divider">or</div>
+      <button class="auth-btn" style="background:var(--surface2);color:var(--text);font-family:'Figtree',sans-serif;font-weight:600;font-size:14px" onclick="doGuest()">👤 Continue as Guest</button>
     </div>
+
+    <!-- SIGNUP FORM -->
     <div class="auth-form" id="auth-form-signup" style="display:none">
-      <div class="auth-field"><label>Full Name</label><input class="auth-input" id="signup-name" type="text" placeholder="Your name"></div>
-      <div class="auth-field"><label>Email</label><input class="auth-input" id="signup-email" type="email" placeholder="you@example.com"></div>
-      <div class="auth-field"><label>Password</label><input class="auth-input" id="signup-pass" type="password" placeholder="Min. 6 characters"></div>
+      <div class="auth-field">
+        <label>Full Name</label>
+        <input class="auth-input" id="signup-name" type="text" placeholder="e.g. Ravi Kumar" autocomplete="name">
+      </div>
+      <div class="auth-field">
+        <label>Email Address</label>
+        <input class="auth-input" id="signup-email" type="email" placeholder="you@gmail.com" autocomplete="email">
+      </div>
+      <div class="auth-field">
+        <label>Password <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--text3)">(min. 6 characters)</span></label>
+        <div class="pw-wrap">
+          <input class="auth-input" id="signup-pass" type="password" placeholder="Create a password" autocomplete="new-password">
+          <button type="button" class="pw-eye" onclick="togglePw('signup-pass',this)" title="Show/hide password">👁</button>
+        </div>
+      </div>
       <button class="auth-btn" onclick="doSignup()">Create Account →</button>
     </div>
   </div>
@@ -484,7 +513,7 @@ body{font-family:'Figtree',sans-serif;background:var(--bg);color:var(--text);min
       <button class="sidebar-logout" onclick="doLogout()" title="Sign out">⏻</button>
     </div>
     <div style="padding:10px 10px 0;font-size:10px;color:var(--text3);line-height:1.6;border-top:1px solid var(--border);margin-top:12px">
-      © 2025 <strong style="color:var(--text2)">[YOUR NAME]</strong><br>
+      © 2026 <strong style="color:var(--text2)">Dinesh R</strong><br>
       HabitWise Pro · All rights reserved
     </div>
   </nav>
@@ -737,37 +766,44 @@ function switchAuthTab(tab,btn){
   document.getElementById('auth-error').classList.remove('show');
 }
 function showAuthError(msg){const e=document.getElementById('auth-error');e.textContent=msg;e.classList.add('show')}
+function clearAuthError(){document.getElementById('auth-error').classList.remove('show')}
+
+function togglePw(inputId,btn){
+  const inp=document.getElementById(inputId);
+  if(inp.type==='password'){inp.type='text';btn.textContent='🙈';btn.classList.add('active');}
+  else{inp.type='password';btn.textContent='👁';btn.classList.remove('active');}
+}
+
 function isValidEmail(email){
-  // Must match format: something@something.something (e.g. user@gmail.com)
   return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email);
 }
-function isValidPassword(pass){
-  // Min 6 chars, at least 1 letter and 1 number
-  return pass.length>=6 && /[a-zA-Z]/.test(pass) && /[0-9]/.test(pass);
-}
+
 function doLogin(){
+  clearAuthError();
   const email=document.getElementById('login-email').value.trim().toLowerCase();
   const pass=document.getElementById('login-pass').value;
-  if(!email||!pass){showAuthError('Please fill in all fields.');return}
-  if(!isValidEmail(email)){showAuthError('Please enter a valid email address (e.g. you@gmail.com).');return}
-  if(!users[email]){showAuthError('No account found with this email. Please sign up first.');return}
-  if(users[email].password!==btoa(pass)){showAuthError('Incorrect password. Please try again.');return}
+  if(!email||!pass){showAuthError('Please fill in both fields.');return}
+  if(!isValidEmail(email)){showAuthError('Please enter a valid email — e.g. you@gmail.com');return}
+  if(!users[email]){showAuthError('No account found with this email. Please create an account first.');return}
+  if(users[email].password!==btoa(pass)){showAuthError('Wrong password. Please try again.');return}
   currentUser=email;localStorage.setItem('hw_current_user',email);
   loadUserData();enterApp();
 }
+
 function doSignup(){
+  clearAuthError();
   const name=document.getElementById('signup-name').value.trim();
   const email=document.getElementById('signup-email').value.trim().toLowerCase();
   const pass=document.getElementById('signup-pass').value;
   if(!name||!email||!pass){showAuthError('Please fill in all fields.');return}
-  if(name.length<2){showAuthError('Please enter your full name (at least 2 characters).');return}
-  if(!isValidEmail(email)){showAuthError('Please enter a valid email address (e.g. you@gmail.com).');return}
-  if(!isValidPassword(pass)){showAuthError('Password must be at least 6 characters and include at least 1 letter and 1 number (e.g. habit123).');return}
-  if(users[email]){showAuthError('An account with this email already exists. Please sign in.');return}
+  if(name.length<2){showAuthError('Please enter your full name.');return}
+  if(!isValidEmail(email)){showAuthError('Please enter a valid email — e.g. you@gmail.com');return}
+  if(pass.length<6){showAuthError('Password must be at least 6 characters.');return}
+  if(users[email]){showAuthError('An account already exists with this email. Please sign in instead.');return}
   users[email]={password:btoa(pass),name,habits:[],reminderDismissed:'',dark:false};
   localStorage.setItem('hw_users',JSON.stringify(users));
   currentUser=email;localStorage.setItem('hw_current_user',email);
-  loadUserData();enterApp();showToast('Welcome to HabitWise! 🎉','success');
+  loadUserData();enterApp();showToast('Welcome to HabitWise Pro! 🎉','success');
 }
 function doGuest(){
   const guestKey='guest@habitwise.app';
@@ -799,6 +835,13 @@ function enterApp(){
 window.addEventListener('load',()=>{
   const saved=localStorage.getItem('hw_current_user');
   if(saved&&users[saved]){currentUser=saved;loadUserData();enterApp();}
+  // Enter key on auth inputs
+  ['login-email','login-pass'].forEach(id=>{
+    document.getElementById(id)?.addEventListener('keydown',e=>{if(e.key==='Enter')doLogin();});
+  });
+  ['signup-name','signup-email','signup-pass'].forEach(id=>{
+    document.getElementById(id)?.addEventListener('keydown',e=>{if(e.key==='Enter')doSignup();});
+  });
 });
 
 // ═══════════════════════════════════════════
