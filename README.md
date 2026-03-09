@@ -24,10 +24,10 @@
 ---
 
 ## 🖼️ Screenshots
-![Login Page](screenshot (1).png)
-![Dashboard](screenshot (2).png)
-![Habits Page](screenshot (3).png)
-![Analytics](screenshot (4).png)
+
+![Dashboard](screenshot1.png)
+![Habits Page](screenshot2.png)
+![Analytics](screenshot3.png)
 
 ---
 
