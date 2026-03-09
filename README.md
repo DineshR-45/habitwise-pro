@@ -72,6 +72,7 @@ habitwise-pro/
 ├── screenshot2.png     ← Habits page screenshot
 ├── screenshot3.png     ← Analytics screenshot
 └── README.md           ← This file
+└── LICENSE             ← Copyright & ownership rules
 ```
 
 ---
