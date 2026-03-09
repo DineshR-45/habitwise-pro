@@ -2,7 +2,17 @@
 
 **A professional daily habit tracker — built with pure HTML, CSS & JavaScript. No frameworks, no installs, works in any browser.**
 
-🌐 **Live Demo:** [dineshR-45.github.io/habitwise-pro](https://DineshR-45.github.io/habitwise-pro)
+🌐 **Live Demo:** [dineshR-45.github.io/habitwise-pro](https://dineshR-45.github.io/habitwise-pro)
+
+---
+
+## 📸 Screenshots
+
+![Dashboard](screenshot1.png)
+
+![Habits Page](screenshot2.png)
+
+![Analytics](screenshot3.png)
 
 ---
 
@@ -10,6 +20,9 @@
 
 - 🔐 **User Accounts** — Sign up, log in, and keep your own private habit data
 - ☀️ **Dashboard** — KPI cards, progress rings, weekly bar chart, 30-day heatmap
+- 💬 **Daily Quote** — A new motivational quote every day to keep you going
+- 🎯 **Habit Goals** — Set a daily target (e.g. 8 glasses, 20 pages) with a progress bar
+- 🎵 **Sound Effects** — Satisfying chime every time you tick a habit done
 - ✅ **Habit Tracking** — Tick only today's habits. Past days auto-show ✗ if missed
 - 🔥 **Streak System** — Streaks reset to zero if you miss a day
 - ⏰ **Reminder Box** — Notifies you of unfinished habits every day
@@ -23,18 +36,10 @@
 
 ---
 
-## 🖼️ Screenshots
-
-![Dashboard](screenshot1.png)
-![Habits Page](screenshot2.png)
-![Analytics](screenshot3.png)
-
----
-
 ## 🚀 How to Use
 
-**Option 1 — Use the live website:**  
-Go to 👉 [dineshR-45.github.io/habitwise-pro](https://DineshR-45.github.io/habitwise-pro)
+**Option 1 — Use the live website:**
+Go to 👉 [dineshR-45.github.io/habitwise-pro](https://dineshR-45.github.io/habitwise-pro)
 
 **Option 2 — Run locally:**
 1. Download `index.html`
@@ -62,15 +67,18 @@ Go to 👉 [dineshR-45.github.io/habitwise-pro](https://DineshR-45.github.io/hab
 ```
 habitwise-pro/
 │
-└── index.html        ← The entire app (single file)
-└── README.md         ← This file
+├── index.html          ← The entire app (single file)
+├── screenshot1.png     ← Dashboard screenshot
+├── screenshot2.png     ← Habits page screenshot
+├── screenshot3.png     ← Analytics screenshot
+└── README.md           ← This file
 ```
 
 ---
 
 ## 🔐 How Login Works
 
-User accounts and habit data are stored in your **browser's LocalStorage**.  
+User accounts and habit data are stored in your **browser's LocalStorage**.
 This means:
 - ✅ Your data stays private on your own device
 - ✅ No server, no cloud, no third-party access
@@ -89,16 +97,16 @@ Inside the app → **Analytics** page → click **⬇ Export**
 
 ## 🙋 FAQ
 
-**Can I use this on my phone?**  
+**Can I use this on my phone?**
 Yes! The layout is fully responsive with a mobile bottom navigation bar.
 
-**Does it work offline?**  
+**Does it work offline?**
 Yes. Once the page is loaded, it works fully offline.
 
-**Will my data be lost if I clear my browser?**  
+**Will my data be lost if I clear my browser?**
 Yes — export your CSV first as a backup before clearing browser data.
 
-**Can multiple people use this on the same device?**  
+**Can multiple people use this on the same device?**
 Yes — each person creates their own account with a separate email and password.
 
 ---
@@ -107,14 +115,16 @@ Yes — each person creates their own account with a separate email and password
 
 © 2025 **DineshR-45**. All rights reserved.
 
-This project was designed and built by **DineshR-45**.  
-You may not copy, resell, or republish this project without permission.
+This project was designed and built by **DineshR-45**.
+Viewing the source code is permitted for learning purposes.
+Reselling or republishing this project without permission is not allowed.
+See the [LICENSE](LICENSE) file for full details.
 
 ---
 
 ## 📬 Contact
 
-Have questions or want to collaborate?  
+Have questions or want to collaborate?
 Find me on GitHub: [@DineshR-45](https://github.com/DineshR-45)
 
 ---
