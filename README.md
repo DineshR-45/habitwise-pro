@@ -1,4 +1,4 @@
-# 🎯 HabitWise Pro — Cloud Edition
+# 🎯 HabitWise Pro
 
 **A professional daily habit tracker with cloud sync, real accounts, and OTP password reset. Works on any device, anywhere.**
 
