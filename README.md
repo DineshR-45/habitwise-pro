@@ -1,8 +1,8 @@
-# 🎯 HabitWise Pro
+# 🎯 HabitWise Pro — Cloud Edition
 
-**A professional daily habit tracker — built with pure HTML, CSS & JavaScript. No frameworks, no installs, works in any browser.**
+**A professional daily habit tracker with cloud sync, real accounts, and OTP password reset. Works on any device, anywhere.**
 
-🌐 **Live Demo:** [dineshR-45.github.io/habitwise-pro](https://dineshR-45.github.io/habitwise-pro)
+🌐 **Live App:** [cheerful-daffodil-97df2e.netlify.app](https://cheerful-daffodil-97df2e.netlify.app)
 
 ---
 
@@ -18,10 +18,12 @@
 
 ## ✨ Features
 
-- 🔐 **User Accounts** — Sign up, log in, and keep your own private habit data
+- 🔐 **Real User Accounts** — Sign up, log in, data synced across all your devices
+- 🔑 **Forgot Password** — Reset via 6-digit OTP sent to your email
+- ☁️ **Cloud Sync** — Your habits are saved to the cloud, never lost
 - ☀️ **Dashboard** — KPI cards, progress rings, weekly bar chart, 30-day heatmap
-- 💬 **Daily Quote** — A new motivational quote every day to keep you going
-- 🎯 **Habit Goals** — Set a daily target (e.g. 8 glasses, 20 pages) with a progress bar
+- 💬 **Daily Quote** — A new motivational quote every day
+- 🎯 **Habit Goals** — Set a daily target (e.g. 8 glasses, 20 pages) with progress bar
 - 🎵 **Sound Effects** — Satisfying chime every time you tick a habit done
 - ✅ **Habit Tracking** — Tick only today's habits. Past days auto-show ✗ if missed
 - 🔥 **Streak System** — Streaks reset to zero if you miss a day
@@ -38,13 +40,13 @@
 
 ## 🚀 How to Use
 
-**Option 1 — Use the live website:**
-Go to 👉 [dineshR-45.github.io/habitwise-pro](https://dineshR-45.github.io/habitwise-pro)
+Just go to the live app and create a free account:
 
-**Option 2 — Run locally:**
-1. Download `index.html`
-2. Open it in any browser (Chrome, Firefox, Safari, Edge)
-3. No setup needed — it works instantly
+👉 [cheerful-daffodil-97df2e.netlify.app](https://cheerful-daffodil-97df2e.netlify.app)
+
+- Works on **any device** — phone, tablet, desktop
+- Works on **any browser** — Chrome, Firefox, Safari, Edge
+- Your data is **synced to the cloud** — log in from anywhere
 
 ---
 
@@ -52,38 +54,24 @@ Go to 👉 [dineshR-45.github.io/habitwise-pro](https://dineshR-45.github.io/hab
 
 | Technology | Purpose |
 |---|---|
-| HTML5 | Structure |
-| CSS3 | Styling, dark mode, animations |
-| Vanilla JavaScript | All logic, auth, data, charts |
-| LocalStorage | Saves user data in the browser |
-| Google Fonts (Syne + Figtree) | Typography |
-
-**No frameworks. No backend. No database. Zero dependencies.**
-
----
-
-## 📁 Project Structure
-
-```
-habitwise-pro/
-│
-├── index.html          ← The entire app (single file)
-├── screenshot1.png     ← Dashboard screenshot
-├── screenshot2.png     ← Habits page screenshot
-├── screenshot3.png     ← Analytics screenshot
-└── README.md           ← This file
-└── LICENSE             ← Copyright & ownership rules
-```
+| HTML5 / CSS3 / Vanilla JS | Frontend |
+| Node.js + Express | Backend API |
+| Supabase (PostgreSQL) | Cloud database |
+| Resend | OTP email delivery |
+| Render | Backend hosting |
+| Netlify | Frontend hosting |
+| JSON Web Tokens | Secure authentication |
+| bcryptjs | Password hashing |
 
 ---
 
-## 🔐 How Login Works
+## 🔐 How Login & Security Works
 
-User accounts and habit data are stored in your **browser's LocalStorage**.
-This means:
-- ✅ Your data stays private on your own device
-- ✅ No server, no cloud, no third-party access
-- ⚠️ Clearing browser data will erase your habits (use Export to back up)
+- Passwords are **hashed with bcrypt** — never stored in plain text
+- Sessions use **JWT tokens** — expire after 30 days
+- Password reset uses a **6-digit OTP** sent to your email — expires in 10 minutes
+- All API endpoints are **rate limited** to prevent abuse
+- Data is stored securely in **Supabase PostgreSQL** with Row Level Security
 
 ---
 
@@ -99,27 +87,26 @@ Inside the app → **Analytics** page → click **⬇ Export**
 ## 🙋 FAQ
 
 **Can I use this on my phone?**
-Yes! The layout is fully responsive with a mobile bottom navigation bar.
-
-**Does it work offline?**
-Yes. Once the page is loaded, it works fully offline.
+Yes! Fully responsive with a mobile bottom navigation bar.
 
 **Will my data be lost if I clear my browser?**
-Yes — export your CSV first as a backup before clearing browser data.
+No — your data is stored in the cloud. Just log back in from any device.
 
-**Can multiple people use this on the same device?**
-Yes — each person creates their own account with a separate email and password.
+**Can I use it on multiple devices?**
+Yes — log in from any device and your habits sync automatically.
+
+**Is my data private?**
+Yes — each account is private and secured with encrypted passwords.
 
 ---
 
 ## 📜 License & Ownership
 
-© 2025 **Dinesh R**. All rights reserved.
+© 2026 **DineshR-45**. All rights reserved.
 
-This project was designed and built by **Dinesh R**.
+This project was designed and built by **DineshR-45**.
 Viewing the source code is permitted for learning purposes.
 Reselling or republishing this project without permission is not allowed.
-See the [LICENSE](LICENSE) file for full details.
 
 ---
 
@@ -131,3 +118,4 @@ Find me on GitHub: [@DineshR-45](https://github.com/DineshR-45)
 ---
 
 *Made with ☕ and consistency.*
+
