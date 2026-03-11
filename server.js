@@ -11,6 +11,9 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 // ─── Clients ───────────────────────────────────────────
+// Gumroad Product ID — set in Render env vars as GUMROAD_PRODUCT_ID
+// Get it from your Gumroad product URL: gumroad.com/l/YOUR_PRODUCT_ID
+
 const supabase = createClient(
   process.env.SUPABASE_URL,
   process.env.SUPABASE_SERVICE_KEY
@@ -314,6 +317,82 @@ app.put('/settings', authRequired, async (req, res) => {
   }, { onConflict: 'user_id' });
 
   res.json({ message: 'Settings saved.' });
+});
+
+// ─── VERIFY GUMROAD LICENSE KEY ──────────────
+app.post('/auth/verify-license', authLimiter, async (req, res) => {
+  const { licenseKey } = req.body;
+  if (!licenseKey) return res.status(400).json({ error: 'License key is required.' });
+
+  const key = licenseKey.trim().toUpperCase();
+
+  // Check if already used in our DB
+  const { data: existing } = await supabase
+    .from('license_keys')
+    .select('*')
+    .eq('key', key)
+    .single();
+
+  if (existing && existing.activated) {
+    return res.status(400).json({ error: 'This license key has already been activated on another account.' });
+  }
+
+  // Verify with Gumroad API
+  try {
+    const gumRes = await fetch('https://api.gumroad.com/v2/licenses/verify', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({
+        product_id: process.env.GUMROAD_PRODUCT_ID,
+        license_key: key,
+        increment_uses_count: 'false'
+      })
+    });
+    const gumData = await gumRes.json();
+
+    if (!gumData.success) {
+      return res.status(400).json({ error: 'Invalid license key. Please check and try again.' });
+    }
+
+    // Check not refunded
+    if (gumData.purchase?.refunded) {
+      return res.status(400).json({ error: 'This license key belongs to a refunded purchase.' });
+    }
+
+    // Store in DB as valid (not yet activated — activated on signup)
+    await supabase.from('license_keys').upsert({
+      key,
+      gumroad_sale_id: gumData.purchase?.sale_id || '',
+      buyer_email: gumData.purchase?.email || '',
+      activated: false
+    }, { onConflict: 'key' });
+
+    res.json({ valid: true, buyerEmail: gumData.purchase?.email || '' });
+
+  } catch (err) {
+    console.error('Gumroad verify error:', err);
+    return res.status(500).json({ error: 'Could not verify license. Please try again.' });
+  }
+});
+
+// ─── ACTIVATE LICENSE ON SIGNUP ──────────────
+// Called after successful signup to mark key as used
+app.post('/auth/activate-license', authRequired, async (req, res) => {
+  const { licenseKey } = req.body;
+  if (!licenseKey) return res.status(400).json({ error: 'License key required.' });
+
+  const key = licenseKey.trim().toUpperCase();
+
+  await supabase.from('license_keys').update({
+    activated: true,
+    activated_by: req.userId,
+    activated_at: new Date().toISOString()
+  }).eq('key', key);
+
+  // Also save on user record
+  await supabase.from('users').update({ license_key: key }).eq('id', req.userId);
+
+  res.json({ message: 'License activated.' });
 });
 
 // ─── START ───────────────────────────────────
