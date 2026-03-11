@@ -21,6 +21,9 @@ const supabase = createClient(
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 // ─── Middleware ─────────────────────────────────────────
+// Fix for Render's proxy
+app.set('trust proxy', 1);
+
 app.use(cors({
   origin: process.env.FRONTEND_URL || '*',
   credentials: true
