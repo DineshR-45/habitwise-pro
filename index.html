@@ -330,8 +330,30 @@ body{font-family:'Figtree',sans-serif;background:var(--bg);color:var(--text);min
     <div class="auth-logo">HabitWise <span>Pro</span></div>
     <div class="auth-tagline">Track, analyze and build lasting habits — synced across all your devices</div>
 
+    <!-- STEP 0: License Key -->
+    <div id="auth-step-license">
+      <div style="text-align:center;margin-bottom:24px">
+        <div style="font-size:36px;margin-bottom:10px">&#128273;</div>
+        <div style="font-family:'Syne',sans-serif;font-size:20px;font-weight:800;margin-bottom:6px">Enter License Key</div>
+        <div style="font-size:13px;color:var(--text2);line-height:1.6">Purchase HabitWise Pro on Gumroad to get your license key. Already have one? Enter it below.</div>
+      </div>
+      <div class="auth-error" id="license-error"></div>
+      <div class="auth-form">
+        <div class="auth-field">
+          <label>License Key</label>
+          <input class="auth-input" id="license-input" type="text" placeholder="XXXXXXXX-XXXXXXXX-XXXXXXXX-XXXXXXXX" autocomplete="off" style="letter-spacing:1px;font-family:monospace;font-size:13px">
+        </div>
+        <button class="auth-btn" id="license-btn" onclick="doVerifyLicense()">Activate License &#8594;</button>
+        <div class="auth-divider">or</div>
+        <button class="auth-btn secondary" onclick="doGuest()">&#128100; Try as Guest <span style="font-size:11px;opacity:0.7">(limited)</span></button>
+        <div style="text-align:center;margin-top:8px">
+          <a href="https://dineshr.gumroad.com/l/habitwise-pro" target="_blank" style="font-size:13px;color:var(--accent);text-decoration:none;font-weight:600">&#128722; Buy on Gumroad &#8594;</a>
+        </div>
+      </div>
+    </div>
+
     <!-- STEP indicator -->
-    <div id="auth-step-login">
+    <div id="auth-step-login" style="display:none">
       <div class="auth-tabs">
         <button class="auth-tab active" onclick="switchAuthTab('login',this)">Sign In</button>
         <button class="auth-tab" onclick="switchAuthTab('signup',this)">Create Account</button>
@@ -951,9 +973,21 @@ function enterApp(){
 window.addEventListener('load',async()=>{
   const savedToken=localStorage.getItem('hw_token');
   const savedUser=localStorage.getItem('hw_user');
+  const savedLicense=localStorage.getItem('hw_license_key');
   if(savedToken&&savedUser){
     token=savedToken;currentUser=JSON.parse(savedUser);
+    verifiedLicenseKey=savedLicense||null;
     await loadAndEnterApp();
+  } else {
+    // Show license screen first
+    if(savedLicense){
+      // Already verified before, skip to login
+      verifiedLicenseKey=savedLicense;
+      document.getElementById('auth-step-license').style.display='none';
+      document.getElementById('auth-step-login').style.display='';
+    } else {
+      showLicenseStep();
+    }
   }
 });
 
@@ -1429,6 +1463,55 @@ function initQuote(){
 }
 
 setInterval(updateReminder,60000);
+
+// ════════════════════════════════════════════
+// LICENSE KEY
+// ════════════════════════════════════════════
+let verifiedLicenseKey = localStorage.getItem('hw_license_key') || null;
+
+function showLicenseStep() {
+  document.getElementById('auth-step-license').style.display = '';
+  document.getElementById('auth-step-login').style.display = 'none';
+  document.getElementById('auth-step-forgot').style.display = 'none';
+  document.getElementById('auth-step-otp').style.display = 'none';
+  document.getElementById('auth-step-newpass').style.display = 'none';
+}
+
+async function doVerifyLicense() {
+  const key = document.getElementById('license-input').value.trim().toUpperCase();
+  const errEl = document.getElementById('license-error');
+  errEl.classList.remove('show');
+  if (!key) { errEl.textContent = 'Please enter your license key.'; errEl.classList.add('show'); return; }
+  setLoading('license-btn', true, 'Activate License →');
+  try {
+    const data = await api('POST', '/auth/verify-license', { licenseKey: key });
+    if (data.valid) {
+      verifiedLicenseKey = key;
+      localStorage.setItem('hw_license_key', key);
+      // Show login/signup
+      document.getElementById('auth-step-license').style.display = 'none';
+      document.getElementById('auth-step-login').style.display = '';
+      showToast('License verified! Create your account.', 'success');
+      // Pre-fill email if Gumroad returned buyer email
+      if (data.buyerEmail) {
+        document.getElementById('signup-email').value = data.buyerEmail;
+        document.getElementById('login-email').value = data.buyerEmail;
+      }
+    }
+  } catch(e) {
+    errEl.textContent = e.message;
+    errEl.classList.add('show');
+  }
+  setLoading('license-btn', false, 'Activate License →');
+}
+
+// Override showLoginStep to go back to license screen
+const _origShowLoginStep = showLoginStep;
+function showLoginStep() {
+  if (!verifiedLicenseKey) { showLicenseStep(); return; }
+  _origShowLoginStep();
+}
+
 </script>
 </body>
 </html>
