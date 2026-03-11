@@ -346,7 +346,7 @@ app.post('/auth/verify-license', authLimiter, async (req, res) => {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: new URLSearchParams({
-        product_permalink: process.env.GUMROAD_PRODUCT_ID,
+        product_id: process.env.GUMROAD_PRODUCT_ID,
         license_key: key,
         increment_uses_count: 'false'
       })
