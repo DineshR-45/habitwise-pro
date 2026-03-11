@@ -343,12 +343,13 @@ app.post('/auth/verify-license', authLimiter, async (req, res) => {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: new URLSearchParams({
-        product_id: process.env.GUMROAD_PRODUCT_ID,
+        product_permalink: process.env.GUMROAD_PRODUCT_ID,
         license_key: key,
         increment_uses_count: 'false'
       })
     });
     const gumData = await gumRes.json();
+    console.log('Gumroad response:', JSON.stringify(gumData));
 
     if (!gumData.success) {
       return res.status(400).json({ error: 'Invalid license key. Please check and try again.' });
